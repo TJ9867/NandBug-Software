@@ -1,5 +1,5 @@
-nmigen==0.2
-bchlib==0.14.0
-nmigen_boards==0.0
-pylibftdi==0.17.0
-halo==0.0.29
+amaranth[builtin-yosys]==0.5.0
+bchlib==2.1.0
+halo==0.0.31
+pylibftdi==0.22.0
+amaranth_boards @ git+https://github.com/amaranth-lang/amaranth-boards@ad5a939
