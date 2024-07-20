@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from nmigen import *
-from nmigen.lib.fifo import AsyncFIFO, SyncFIFO
+from amaranth import *
+from amaranth.lib.fifo import AsyncFIFO, SyncFIFO
 
 
 class FtdiFifo(Elaboratable):
@@ -41,30 +41,30 @@ class FtdiFifo(Elaboratable):
 
         # Set data bus direction
         with m.If(write_operation):
-            m.d.comb += [data.oe.eq(1), oe.eq(1)]
+            m.d.comb += [data.oe.eq(1), oe.o.eq(1)]
             m.d.sync += oe_ready.eq(0)  # Add one delay cycle
         with m.Else():
-            m.d.comb += [data.oe.eq(0), oe.eq(0)]
+            m.d.comb += [data.oe.eq(0), oe.o.eq(0)]
             m.d.sync += oe_ready.eq(1)  # Add one delay cycle
 
         # Manage "write to FTDI" operations
         with m.If((txe == 0) & (self.tx_buffer.r_rdy)):
             m.d.comb += [write_operation.eq(1),
-                         wr.eq(0),
+                         wr.o.eq(0),
                          self.tx_buffer.r_en.eq(1),
                          data.o.eq(self.tx_buffer.r_data)]
         with m.Else():
-            m.d.comb += [wr.eq(1),
+            m.d.comb += [wr.o.eq(1),
                          self.tx_buffer.r_en.eq(0)]
 
         # Manage "Read from FTDI" operations
         with m.If((rxf == 0) & (self.rx_buffer.w_rdy)
                   & (~write_operation) & oe_ready):
-            m.d.comb += [rd.eq(0),
+            m.d.comb += [rd.o.eq(0),
                          self.rx_buffer.w_en.eq(1),
                          self.rx_buffer.w_data.eq(data.i)]
         with m.Else():
-            m.d.comb += [rd.eq(1),
+            m.d.comb += [rd.o.eq(1),
                          self.rx_buffer.w_en.eq(0)]
 
         return m

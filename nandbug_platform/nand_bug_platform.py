@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-from nmigen.build import *
-from nmigen.vendor.lattice_ice40 import *
-from nmigen_boards.resources import *
+from amaranth.build import *
+from amaranth.vendor import *
+from amaranth_boards.resources import *
 
 from .ice_ftdi import NandBugFtdiProgrammer
 
