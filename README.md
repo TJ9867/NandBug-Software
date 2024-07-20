@@ -94,7 +94,7 @@ Effectively, this makes the NAND Flash directly connected to the *Google Home Mi
 
 ## Technical Details
 
-- [nMigen](https://github.com/nmigen/nmigen) is used to generate bitstreams uploaded in the FPGA of *NandBug*.
+- [Amaranth (previously nMigen)](https://github.com/amaranth-lang/amaranth) is used to generate bitstreams uploaded in the FPGA of *NandBug*.
 - [pylibftdi](https://pylibftdi.readthedocs.io/en/0.15.0/) is used for configuring and communicating with *NandBug*.
 - [bchlib](https://pypi.org/project/bchlib/) is used to perform error correction.
 - For now, the code is very specific to the NAND Flash and *SoC* used by the *Google Home Mini* (memory size and layout, *ECC* scheme, ...) and shouldn't be used with anything else without a couple of modifications.
