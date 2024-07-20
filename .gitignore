@@ -60,3 +60,6 @@ target/
 
 *.bin
 .venv/
+venv/
+
+*.kate-swp
