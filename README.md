@@ -29,9 +29,6 @@ python3 -m venv nandbug_venv
 pip install -r requirements.txt
 ```
 
-```bash
-pip install git+https://github.com/amaranth-lang/amaranth-boards  # at the time of writing, the Pypi package is empty.
-```
 If all goes well, you should be able to run the dump bitstream:
 ```bash
 ./NandBugDumper.py test.dump  # results in blinky lights and a progress bar
