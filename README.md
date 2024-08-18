@@ -11,29 +11,28 @@ The goal of *NandBug* is to make the NAND Flash of a *Google Home Mini* *In-Syst
 You can refer to the article for more background information and details.
 
 ## Installation
-### Apt Packages
+### 1. Apt Packages (For apt-based Linux systems)
 ```bash
 sudo apt install fpga-icestorm nextpnr-ice40 yosys
 ```
 
-### Dnf Packages
+### 1. Dnf Packages (For dnf-based Linux systems)
 ```bash
 sudo dnf install icestorm nextpnr yosys
 ```
 
-### Python Packages
+### 2. Python Packages
 It's a good idea to use a venv for the Python packages:
 ```bash
 python3 -m venv nandbug_venv
 . nandbug_venv/bin/activate
 pip install -r requirements.txt
 ```
-
+### 3. Run
 If all goes well, you should be able to run the dump bitstream:
 ```bash
 ./NandBugDumper.py test.dump  # results in blinky lights and a progress bar
 ```
-
 
 ## Dumping the Flash
 
