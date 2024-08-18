@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from nmigen import *
+from amaranth import *
 
 
 class Blinker(Elaboratable):
@@ -24,7 +24,7 @@ class Blinker(Elaboratable):
         counter = Signal(range(max_value))
 
         with m.If(counter == max_value):
-            m.d.sync += self.s.eq(~self.s)
+            m.d.sync += self.s.o.eq(~self.s.o)
             m.d.sync += counter.eq(0)
         with m.Else():
             m.d.sync += counter.eq(counter + 1)

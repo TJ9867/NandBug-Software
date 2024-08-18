@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from nmigen import *
+from amaranth import *
 
 from .modules import *
 
@@ -58,7 +58,7 @@ class Dump(Elaboratable):
 
             with m.State("RESET"):
                 # Send RESET command (0xFF)
-                with m.If(~nand_fsm.busy):
+                with m.If(nand_fsm.busy == 0):
                     m.d.sync += nand_fsm.i_data.eq(0xFF)
                     m.d.sync += nand_fsm.send_cmd.eq(1)
                     m.d.sync += counter.eq(0)
@@ -79,7 +79,7 @@ class Dump(Elaboratable):
 
             with m.State("CMD1"):
                 # Start by sending the 0x00 CMD
-                with m.If(~nand_fsm.busy):
+                with m.If(nand_fsm.busy == 0):
                     m.d.sync += nand_fsm.i_data.eq(0x00)
                     m.d.sync += nand_fsm.send_cmd.eq(1)
                     m.d.sync += counter.eq(0)
@@ -88,7 +88,7 @@ class Dump(Elaboratable):
             with m.State("ADDR"):
                 # Send the 5 bytes of the address
                 m.d.sync += nand_fsm.send_cmd.eq(0)
-                with m.If(~nand_fsm.busy):
+                with m.If(nand_fsm.busy == 0):
                     with m.If(counter < 5):
                         m.d.sync += nand_fsm.i_data.eq(address[counter])
                         m.d.sync += nand_fsm.send_address.eq(1)
@@ -100,7 +100,7 @@ class Dump(Elaboratable):
 
             with m.State("CMD2"):
                 # Finish with the 0x30 CMD
-                with m.If(~nand_fsm.busy):
+                with m.If(nand_fsm.busy == 0):
                     m.d.sync += nand_fsm.i_data.eq(0x30)
                     m.d.sync += nand_fsm.send_cmd.eq(1)
                     m.d.sync += counter.eq(0)
@@ -122,7 +122,7 @@ class Dump(Elaboratable):
             with m.State("READ"):
                 # Request a READ from the NAND FSM
                 m.d.sync += ftdi_fifo.tx_buffer.w_en.eq(0)
-                with m.If(~nand_fsm.busy):
+                with m.If(nand_fsm.busy == 0):
                     m.d.sync += ftdi_fifo.tx_buffer.w_en.eq(0)
                     m.d.sync += nand_fsm.read.eq(1)
                     m.next = "END_READ"
@@ -134,7 +134,7 @@ class Dump(Elaboratable):
             with m.State("FIFO"):
                 # Send the read data to the FTDI FIFO
                 with m.If(counter < 2176):
-                    with m.If(~nand_fsm.busy):
+                    with m.If(nand_fsm.busy == 0):
                         with m.If(ftdi_fifo.tx_buffer.w_rdy):
                             m.d.sync += ftdi_fifo.tx_buffer.w_en.eq(1)
                             m.d.sync += counter.eq(counter+1)
