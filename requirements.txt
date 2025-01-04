@@ -1,4 +1,4 @@
-amaranth[builtin-yosys]==0.5.0
+amaranth[builtin-yosys]==0.5.4
 bchlib==2.1.0
 halo==0.0.31
 pylibftdi==0.22.0
