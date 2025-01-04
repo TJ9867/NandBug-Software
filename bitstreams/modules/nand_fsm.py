@@ -4,7 +4,7 @@ from enum import Enum
 
 from amaranth import *
 from amaranth import sim as pysim
-
+from amaranth.lib import wiring
 
 class WriteType(Enum):
     CMD = 0
@@ -12,7 +12,7 @@ class WriteType(Enum):
     DATA = 2
 
 
-class NandFSM(Elaboratable):
+class NandFSM(wiring.Component):
     """
     NAND FSM Implementation, used to drive a NAND Flash bus
 

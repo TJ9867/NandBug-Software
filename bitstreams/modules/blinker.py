@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 from amaranth import *
+from amaranth.lib import wiring
 
-
-class Blinker(Elaboratable):
+class Blinker(wiring.Component):
 
     def __init__(self, s, period):
         """

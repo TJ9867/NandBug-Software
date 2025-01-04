@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 from amaranth import *
+from amaranth.lib import wiring
 
 from .modules import *
 
 
-class Dump(Elaboratable):
+class Dump(wiring.Component):
 
     def __init__(self):
         pass
@@ -17,6 +18,7 @@ class Dump(Elaboratable):
         #
         # Status LED Module
         #
+
         blink_led = platform.request("led", 0)
         blinker = Blinker(blink_led, 0.5)
         m.submodules += blinker

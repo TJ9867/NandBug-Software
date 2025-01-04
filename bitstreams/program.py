@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 from amaranth import *
+from amaranth.lib import wiring
 
 from .modules import *
 
 
-class Program(Elaboratable):
+class Program(wiring.Component):
 
     def __init__(self):
         pass

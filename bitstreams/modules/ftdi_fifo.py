@@ -2,9 +2,9 @@
 
 from amaranth import *
 from amaranth.lib.fifo import AsyncFIFO, SyncFIFO
+from amaranth.lib import wiring
 
-
-class FtdiFifo(Elaboratable):
+class FtdiFifo(wiring.Component):
     """
     FTDI FIFO Interface, to be used with a FTDI in Sync FIFO Mode
 
