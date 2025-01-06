@@ -1,5 +1,5 @@
-amaranth[builtin-yosys]==0.5.4
+amaranth[builtin-yosys] @ git+https://github.com/amaranth-lang/amaranth@590cba1
 bchlib==2.1.0
 halo==0.0.31
 pylibftdi==0.22.0
-amaranth_boards @ git+https://github.com/amaranth-lang/amaranth-boards@ad5a939
+amaranth_boards @ git+https://github.com/amaranth-lang/amaranth-boards@9d97c48
