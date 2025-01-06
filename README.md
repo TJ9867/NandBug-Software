@@ -13,12 +13,12 @@ You can refer to the article for more background information and details.
 ## Installation
 ### 1. Apt Packages (For apt-based Linux systems)
 ```bash
-sudo apt install fpga-icestorm nextpnr-ice40 yosys
+sudo apt install fpga-icestorm nextpnr-ice40 yosys libftdi-dev
 ```
 
 ### 1. Dnf Packages (For dnf-based Linux systems)
 ```bash
-sudo dnf install icestorm nextpnr yosys
+sudo dnf install icestorm nextpnr yosys libftdi-devel
 ```
 
 ### 2. Python Packages
@@ -28,7 +28,12 @@ python3 -m venv nandbug_venv
 . nandbug_venv/bin/activate
 pip install -r requirements.txt
 ```
-### 3. Run
+### 3. Install EEPROM config
+```bash
+sudo ftdi_eeprom --flash-eeprom eeprom.conf
+```
+
+### 4. Run
 If all goes well, you should be able to run the dump bitstream:
 ```bash
 ./NandBugDumper.py test.dump  # results in blinky lights and a progress bar

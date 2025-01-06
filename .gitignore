@@ -63,3 +63,4 @@ target/
 venv/
 
 *.kate-swp
+eeprom.new
