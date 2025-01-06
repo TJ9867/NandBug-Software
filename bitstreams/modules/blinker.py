@@ -37,7 +37,8 @@ class PlatformBlinker(Elaboratable):
         blink_led = platform.request("led", 0) # options are 0,1,2 
         blinker = Blinker(0.5)
 
-        m.d.comb += blinker.led_sig.eq(blink_led.o)
+        # m.d.comb += blinker.led_sig.eq(blink_led.o) # complains about two driving sources (makes sense)
+        wiring.connect(m, blink_led, blinker.led_sig)  # Argument 1 needs a signature? 
         m.submodules += blinker
 
         return m
