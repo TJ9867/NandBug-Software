@@ -3,6 +3,8 @@
 from amaranth import *
 from amaranth.lib import wiring
 
+from bitstreams.modules.blinker import PlatformBlinker
+
 from .modules import *
 
 
@@ -19,8 +21,7 @@ class Dump(wiring.Component):
         # Status LED Module
         #
 
-        blink_led = platform.request("led", 0)
-        blinker = Blinker(blink_led, 0.5)
+        blinker = PlatformBlinker(0.5)
         m.submodules += blinker
 
         #

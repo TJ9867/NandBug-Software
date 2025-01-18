@@ -28,7 +28,6 @@ class Blinker(wiring.Component):
 
 class PlatformBlinker(Elaboratable):
     def __init__(self, period):
-        super().__init__()
         self.period = period
 
     def elaborate(self, platform):
@@ -37,8 +36,7 @@ class PlatformBlinker(Elaboratable):
         blink_led = platform.request("led", 0) # options are 0,1,2 
         blinker = Blinker(0.5)
 
-        # m.d.comb += blinker.led_sig.eq(blink_led.o) # complains about two driving sources (makes sense)
-        wiring.connect(m, blink_led, blinker.led_sig)  # Argument 1 needs a signature? 
+        m.d.comb += blink_led.o.eq(blinker.led_sig) # complains about two driving sources (makes sense)? 
         m.submodules += blinker
 
         return m
